@@ -29,7 +29,10 @@ public class PlayerMovement : MonoBehaviour
 	private bool PlayerDed = false;
 	private bool PlayerHurt = false;
 
-
+	public int GetIndex()
+	{
+		return fatindex;
+	}
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
@@ -85,6 +88,17 @@ public class PlayerMovement : MonoBehaviour
 		jump = false;
 	}
 
+	public float SpikeDelay = 0.25f;
+	private bool CanHurtBySpike = true;
+	IEnumerator CoWaitToSpike(float waitDuation)
+	{
+		CanHurtBySpike = false;
+
+		yield return new WaitForSeconds(waitDuation);
+
+		CanHurtBySpike = true;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.transform.tag == "Food")
@@ -111,29 +125,6 @@ public class PlayerMovement : MonoBehaviour
 			Destroy(collision.gameObject);
 		}
 
-		if (collision.transform.tag == "Spikes")
-		{
-			fd = collision.transform.GetComponent<Food>();
-			if (fd == null)
-			{
-				Debug.Log("LOl a bug1!");
-				return;
-			}
-
-
-			//Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
-			//Debug.Log("Mass before: " + rb.mass);
-
-			fatindex--;// -= (int)fd.GetHealth();
-			// Player is lover hp
-			if (rb.mass > Fat[fatindex])
-				PlayerHurt = true;
-
-			rb.mass = Fat[fatindex];
-			//Debug.Log("Mass: " + rb.mass);
-			//Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
-			Destroy(collision.gameObject);
-		}
 
 		if (collision.transform.tag == "Ded")
 		{
@@ -148,5 +139,24 @@ public class PlayerMovement : MonoBehaviour
 			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
 		}
 
+
+	}
+
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+
+		if (collision.transform.tag == "Spikes" && CanHurtBySpike)
+		{
+			Debug.Log("Spikes!");
+
+			fatindex--;
+			if (rb.mass > Fat[fatindex])
+				PlayerHurt = true;
+
+			rb.mass = Fat[fatindex];
+
+			StartCoroutine(CoWaitToSpike(SpikeDelay));
+		}
 	}
 }

@@ -13,8 +13,16 @@ public class Health : MonoBehaviour
     public Sprite Heart64;
     public Sprite Nheart;
 
+    public PlayerMovement PM;
+
+    private void Start()
+    {
+        PM = this.GetComponent<PlayerMovement>();
+    }
+
     void Update()
     {
+        health = PM.GetIndex();
 
         if (health > numOfHearts)
         {

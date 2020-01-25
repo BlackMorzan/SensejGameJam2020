@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 	{
 		rb = this.GetComponent<Rigidbody2D>();
 		rb.mass = Fat[fatindex];
+		PlayerDed = false;
 	}
 
 	// Update is called once per frame
@@ -78,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Move our character
-		controller.Sounds(jump, horizontalMove, PlayerDed, PlayerHurt);
+		PlayerHurt = controller.Sounds(jump, horizontalMove, PlayerDed, PlayerHurt);
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}

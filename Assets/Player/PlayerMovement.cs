@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
-		rb.mass += Fat[fatindex];
+		rb.mass = Fat[fatindex];
 	}
 
 	// Update is called once per frame

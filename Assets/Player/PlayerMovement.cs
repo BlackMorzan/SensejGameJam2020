@@ -22,11 +22,17 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField]
 	private Transform Resp;
 
-
+	[SerializeField]
+	private AudioSource HopSound;
+	[SerializeField]
+	private AudioSource LandSound;
+	[SerializeField]
+	private AudioSource TapSound;
 
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
+		HopSound = this.GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
@@ -69,6 +75,10 @@ public class PlayerMovement : MonoBehaviour
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+		if (jump)
+		{
+			HopSound.Play();
+		}
 		jump = false;
 	}
 

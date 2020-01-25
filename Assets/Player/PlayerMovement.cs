@@ -97,8 +97,8 @@ public class PlayerMovement : MonoBehaviour
 			}
 
 
-			Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
-			Debug.Log("Mass before: " + rb.mass);
+			//Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
+			//Debug.Log("Mass before: " + rb.mass);
 
 			fatindex += (int) fd.GetHealth();
 			// Player is lover hp
@@ -106,11 +106,35 @@ public class PlayerMovement : MonoBehaviour
 				PlayerHurt = true;
 
 			rb.mass = Fat[fatindex];
-			Debug.Log("Mass: " + rb.mass);
-			Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
+			//Debug.Log("Mass: " + rb.mass);
+			//Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
 			Destroy(collision.gameObject);
 		}
-		
+
+		if (collision.transform.tag == "Spikes")
+		{
+			fd = collision.transform.GetComponent<Food>();
+			if (fd == null)
+			{
+				Debug.Log("LOl a bug1!");
+				return;
+			}
+
+
+			//Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
+			//Debug.Log("Mass before: " + rb.mass);
+
+			fatindex--;// -= (int)fd.GetHealth();
+			// Player is lover hp
+			if (rb.mass > Fat[fatindex])
+				PlayerHurt = true;
+
+			rb.mass = Fat[fatindex];
+			//Debug.Log("Mass: " + rb.mass);
+			//Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
+			Destroy(collision.gameObject);
+		}
+
 		if (collision.transform.tag == "Ded")
 		{
 			rb.mass = 0.1f;

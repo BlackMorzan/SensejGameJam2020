@@ -64,6 +64,7 @@ public class CharacterController2D : MonoBehaviour
 	{
 		//GetComponent<Animator>();
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_Animator.SetBool("Speed", false);
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();

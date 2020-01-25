@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
 {
+
 	[SerializeField] private float m_JumpForce = 400f;                          // Amount of force added when the player jumps.
 	[Range(0, 1)] [SerializeField] private float m_CrouchSpeed = .36f;          // Amount of maxSpeed applied to crouching movement. 1 = 100%
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
@@ -56,9 +57,14 @@ public class CharacterController2D : MonoBehaviour
 
 	private bool InAir = false;
 
+	[SerializeField]
+	private Animator m_Animator;
+
 	private void Awake()
 	{
+		//GetComponent<Animator>();
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
+		m_Animator.SetBool("Speed", false);
 
 		if (OnLandEvent == null)
 			OnLandEvent = new UnityEvent();
@@ -83,7 +89,10 @@ public class CharacterController2D : MonoBehaviour
 			{
 				m_Grounded = true;
 				if (!wasGrounded)
+				{
 					OnLandEvent.Invoke();
+				}
+
 			}
 		}
 	}
@@ -104,6 +113,13 @@ public class CharacterController2D : MonoBehaviour
 		//only control the player if grounded or airControl is turned on
 		if (m_Grounded || m_AirControl)
 		{
+			//animator//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if (m_Rigidbody2D.velocity.x != 0)
+			{
+				m_Animator.SetBool("Speed", true);
+			}
+			else
+				m_Animator.SetBool("Speed", false);
 
 			// If crouching
 			if (crouch)
@@ -161,6 +177,7 @@ public class CharacterController2D : MonoBehaviour
 			//PlayerSound.clip = Jump;
 			//PlayerSound.Play();
 			//Debug.Log("jump");
+			m_Animator.SetBool("Hight", true);
 		}
 	}
 
@@ -189,6 +206,7 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded && m_Rigidbody2D.velocity.y < -0.5)
 		{
 			PlayerSound.clip = Land;
+			m_Animator.SetBool("Hight", false);
 
 			if (!PlayerSound.isPlaying)
 				PlayerSound.Play();

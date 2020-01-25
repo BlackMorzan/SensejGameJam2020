@@ -54,6 +54,8 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	private AudioClip Death;
 
+	private bool InAir = false;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -181,14 +183,26 @@ public class CharacterController2D : MonoBehaviour
 		{
 			PlayerSound.clip = Jump;
 			PlayerSound.Play();
-			Debug.Log("jump");
+			InAir = true;
 		}
 
 		if (m_Grounded && move!=0)
 		{
 			PlayerSound.clip = Step;
-			PlayerSound.Play();
-			Debug.Log("jump");
+
+			if (!PlayerSound.isPlaying)
+			{
+				PlayerSound.Play();
+			}
 		}
+
+		if (m_Grounded && InAir)
+		{
+			InAir = false;
+			PlayerSound.clip = Land;
+			PlayerSound.Play();
+		}
+
+		//if ()
 	}
 }

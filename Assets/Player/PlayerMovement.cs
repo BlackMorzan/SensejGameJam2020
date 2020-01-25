@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
-		rb.mass += Fat[fatindex];
+		rb.mass = Fat[fatindex];
 	}
 
 	// Update is called once per frame
@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
 			fatindex += (int) fd.GetHealth();
 
 			//ChangeMass = fd.GetHealth();
-			rb.mass += Fat[fatindex];
+			rb.mass = Fat[fatindex];
 			Debug.Log("Mass: " + rb.mass);
 			Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
 			Destroy(collision.gameObject);

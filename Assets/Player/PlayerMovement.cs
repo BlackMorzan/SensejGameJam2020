@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 			//	return;
 			//}
 
-			fatindex = (int) fd.GetHealth();
+			fatindex += (int) fd.GetHealth();
 
 			//ChangeMass = fd.GetHealth();
 			rb.mass = Fat[fatindex];

@@ -24,12 +24,13 @@ public class PlayerMovement : MonoBehaviour
 
 	[SerializeField]
 	private List<float> Fat = new List<float>();
-	private int fatindex = 0;
+	private int fatindex = 2;
 
 
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
+		rb.mass += Fat[fatindex];
 	}
 
 	// Update is called once per frame
@@ -73,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Move our character
+		controller.Sounds(jump, horizontalMove);
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
@@ -93,13 +95,15 @@ public class PlayerMovement : MonoBehaviour
 			//	Debug.Log("LOl a bug2!");
 			//	return;
 			//}
+			Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
+			Debug.Log("Mass before: " + rb.mass);
 
 			fatindex += (int) fd.GetHealth();
 
 			//ChangeMass = fd.GetHealth();
 			rb.mass += Fat[fatindex];
 			Debug.Log("Mass: " + rb.mass);
-			Debug.Log("ChangeMass: " + ChangeMass);
+			Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
 			Destroy(collision.gameObject);
 		}
 		if (collision.transform.tag == "Ded")

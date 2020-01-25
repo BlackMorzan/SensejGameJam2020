@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
 
 	private Rigidbody2D rb;
 	private Food fd;
-	private GameObject Food;
 	//test
 
 	[SerializeField]
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log("DED");
 			rb.mass = 3;
 			transform.position = Resp.transform.position;
+			SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
 		}
 	}
 

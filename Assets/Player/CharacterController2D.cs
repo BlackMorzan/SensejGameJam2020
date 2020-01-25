@@ -30,6 +30,30 @@ public class CharacterController2D : MonoBehaviour
 	public BoolEvent OnCrouchEvent;
 	private bool m_wasCrouching = false;
 
+
+	////////////SOUNDS
+	[SerializeField]
+	private AudioSource PlayerSound;
+
+
+	[SerializeField]
+	private AudioClip Eat;
+
+	[SerializeField]
+	private AudioClip Land;
+
+	[SerializeField]
+	private AudioClip Step;
+
+	[SerializeField]
+	private AudioClip Vomit;
+
+	[SerializeField]
+	private AudioClip Jump;
+
+	[SerializeField]
+	private AudioClip Death;
+
 	private void Awake()
 	{
 		m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -39,6 +63,8 @@ public class CharacterController2D : MonoBehaviour
 
 		if (OnCrouchEvent == null)
 			OnCrouchEvent = new BoolEvent();
+
+		PlayerSound = this.GetComponent<AudioSource>();
 	}
 
 	private void FixedUpdate()
@@ -130,6 +156,14 @@ public class CharacterController2D : MonoBehaviour
 			// Add a vertical force to the player.
 			m_Grounded = false;
 			m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+		}
+	}
+
+	private void Sounds()
+	{
+		if (m_Grounded && Jump)
+		{
+			PlayerSound.Play();
 		}
 	}
 

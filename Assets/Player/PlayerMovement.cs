@@ -23,22 +23,19 @@ public class PlayerMovement : MonoBehaviour
 	private Transform Resp;
 
 	[SerializeField]
-	private AudioSource HopSound;
-	[SerializeField]
-	private AudioSource LandSound;
-	[SerializeField]
-	private AudioSource TapSound;
+	private List<float> Fat = new List<float>();
+	private int fatindex = 0;
+
 
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
-		HopSound = this.GetComponent<AudioSource>();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log("jumping "+ jump);
+		//Debug.Log("jumping "+ jump);
 		Move();
 		Kill();
 	}
@@ -49,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 		{
 			Debug.Log("DED");
 			rb.mass = 3;
-			transform.position = Resp.transform.position;
+			rb.velocity = Vector3.zero;
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
 		}
 	}
@@ -77,10 +74,6 @@ public class PlayerMovement : MonoBehaviour
 	{
 		// Move our character
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
-		if (jump)
-		{
-			HopSound.Play();
-		}
 		jump = false;
 	}
 
@@ -100,8 +93,11 @@ public class PlayerMovement : MonoBehaviour
 			//	Debug.Log("LOl a bug2!");
 			//	return;
 			//}
-			ChangeMass = fd.GetHealth();
-			rb.mass += ChangeMass;
+
+			fatindex = (int) fd.GetHealth();
+
+			//ChangeMass = fd.GetHealth();
+			rb.mass = Fat[fatindex];
 			Debug.Log("Mass: " + rb.mass);
 			Debug.Log("ChangeMass: " + ChangeMass);
 			Destroy(collision.gameObject);

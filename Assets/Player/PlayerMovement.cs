@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		Debug.Log("jumping "+ jump);
 		Move();
 		Kill();
 	}
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log("DED");
 			rb.mass = 3;
 			transform.position = Resp.transform.position;
-			SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
 		}
 	}
 

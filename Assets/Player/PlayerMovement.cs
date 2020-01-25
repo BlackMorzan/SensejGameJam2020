@@ -119,10 +119,10 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 
-
 		if (collision.transform.tag == "Finish")
 		{
 			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
 		}
+
 	}
 }

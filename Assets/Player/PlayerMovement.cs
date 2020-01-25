@@ -24,7 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
 	[SerializeField]
 	private List<float> Fat = new List<float>();
-	private int fatindex = 2;
+	private int fatindex = 3;
+
+	private bool PlayerDed = false;
+	private bool PlayerHurt = false;
 
 
 	private void Start()
@@ -43,12 +46,13 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Kill()
 	{
-		if (rb.mass < 1)
+		if (rb.mass < 0.5)
 		{
 			Debug.Log("DED");
 			rb.mass = 3;
 			rb.velocity = Vector3.zero;
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name, LoadSceneMode.Single);
+			PlayerDed = true;
 		}
 	}
 
@@ -74,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		// Move our character
-		controller.Sounds(jump, horizontalMove);
+		controller.Sounds(jump, horizontalMove, PlayerDed, PlayerHurt);
 		controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
 		jump = false;
 	}
@@ -89,23 +93,22 @@ public class PlayerMovement : MonoBehaviour
 				Debug.Log("LOl a bug1!");
 				return;
 			}
-			//Food = collision.transform.GetComponent<GameObject>();
-			//if (Food == null)
-			//{
-			//	Debug.Log("LOl a bug2!");
-			//	return;
-			//}
+
+
 			Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
 			Debug.Log("Mass before: " + rb.mass);
 
 			fatindex += (int) fd.GetHealth();
+			// Player is lover hp
+			if (rb.mass > Fat[fatindex])
+				PlayerHurt = true;
 
-			//ChangeMass = fd.GetHealth();
 			rb.mass = Fat[fatindex];
 			Debug.Log("Mass: " + rb.mass);
 			Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
 			Destroy(collision.gameObject);
 		}
+		
 		if (collision.transform.tag == "Ded")
 		{
 			rb.mass = 0.1f;

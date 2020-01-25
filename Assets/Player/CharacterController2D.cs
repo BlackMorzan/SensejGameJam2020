@@ -177,7 +177,7 @@ public class CharacterController2D : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void Sounds(bool jump, float move)
+	public void Sounds(bool jump, float move, bool PlayerDed, bool PlayerHurt)
 	{
 		if (m_Grounded && jump)
 		{
@@ -201,8 +201,23 @@ public class CharacterController2D : MonoBehaviour
 			InAir = false;
 			PlayerSound.clip = Land;
 			PlayerSound.Play();
+			Debug.Log("Land");
 		}
 
-		//if ()
+		if (PlayerDed)
+		{
+			PlayerDed = false;
+			PlayerSound.clip = Death;
+			PlayerSound.Play();
+			Debug.Log("Dying");
+		}
+
+		if (PlayerHurt)
+		{
+			PlayerHurt = false;
+			PlayerSound.clip = Vomit;
+			PlayerSound.Play();
+			Debug.Log("Hurt");
+		}
 	}
 }

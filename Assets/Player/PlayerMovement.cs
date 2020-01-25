@@ -117,5 +117,12 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = Resp.transform.position;
 			Debug.Log("fall");
 		}
+
+
+
+		if (collision.transform.tag == "Finish")
+		{
+			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
+		}
 	}
 }

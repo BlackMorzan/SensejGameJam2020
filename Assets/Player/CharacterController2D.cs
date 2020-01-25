@@ -205,7 +205,7 @@ public class CharacterController2D : MonoBehaviour
 		if (m_Grounded && m_Rigidbody2D.velocity.y < -0.5)
 		{
 			PlayerSound.clip = Land;
-			m_Animator.SetBool("jump", false);
+			m_Animator.SetBool("Hight", false);
 
 			if (!PlayerSound.isPlaying)
 				PlayerSound.Play();

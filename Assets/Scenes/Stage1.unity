@@ -719,7 +719,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.6958146, y: -2.9299886, z: -10}
+  m_LocalPosition: {x: 1.7048478, y: -2.9299886, z: -10}
   m_LocalScale: {x: 0.9014144, y: 0.80713654, z: 0.9818619}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4665,22 +4665,42 @@ PrefabInstance:
     - target: {fileID: 6125920056049956244, guid: 7be6782931005f24888bd1b99ccbda9e,
         type: 3}
       propertyPath: m_JumpForce
-      value: 2500
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
+        type: 3}
+      propertyPath: Fat.Array.size
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
         type: 3}
       propertyPath: Fat.Array.data[2]
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
-        type: 3}
-      propertyPath: Fat.Array.data[1]
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
         type: 3}
-      propertyPath: Fat.Array.data[0]
+      propertyPath: Fat.Array.data[1]
       value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
+        type: 3}
+      propertyPath: Fat.Array.data[0]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
+        type: 3}
+      propertyPath: Fat.Array.data[5]
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
+        type: 3}
+      propertyPath: Fat.Array.data[4]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6125920056049956247, guid: 7be6782931005f24888bd1b99ccbda9e,
+        type: 3}
+      propertyPath: Fat.Array.data[3]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6125920056154067424, guid: 7be6782931005f24888bd1b99ccbda9e,
         type: 3}

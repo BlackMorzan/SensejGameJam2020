@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/Stage2 \u2014 kopia.unity"
     guid: ac77b480a1e99564c864094285fe165b
+  - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: 864863a20f311af45bf46859e86277a9
   m_configObjects: {}

@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuSC : MonoBehaviour
 {
+    public int Scene;
 
     public void FirstScene()
     {
-        SceneManager.LoadScene("Stage1", LoadSceneMode.Single);
+        SceneManager.LoadScene(Scene, LoadSceneMode.Single);
     }
 
     public void Exit()

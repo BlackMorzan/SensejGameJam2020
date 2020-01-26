@@ -151,12 +151,12 @@ public class PlayerMovement : MonoBehaviour
 
 		if (collision.transform.tag == "Finish1")
 		{
-			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
+			SceneManager.LoadScene("Stage2 — kopia", LoadSceneMode.Single);
 		}
 
 		if (collision.transform.tag == "Finish2")
 		{
-			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
+			SceneManager.LoadScene("Stage3", LoadSceneMode.Single);
 		}
 
 		//CARNGE MODE/////////////^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

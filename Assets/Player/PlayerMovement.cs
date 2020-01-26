@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 
 public class PlayerMovement : MonoBehaviour
 {
+
+	[Header("Events")]
+	[Space]
+
+	public UnityEvent OnLandEvent;
+
 
 	public CharacterController2D controller;
 
@@ -29,12 +37,21 @@ public class PlayerMovement : MonoBehaviour
 	private bool PlayerDed = false;
 	private bool PlayerHurt = false;
 
-
+	public int GetIndex()
+	{
+		return fatindex;
+	}
 	private void Start()
 	{
 		rb = this.GetComponent<Rigidbody2D>();
 		rb.mass = Fat[fatindex];
 		PlayerDed = false;
+	}
+
+	private void Awake()
+	{
+		if (OnLandEvent == null)
+			OnLandEvent = new UnityEvent();
 	}
 
 	// Update is called once per frame
@@ -85,6 +102,17 @@ public class PlayerMovement : MonoBehaviour
 		jump = false;
 	}
 
+	public float SpikeDelay = 0.25f;
+	private bool CanHurtBySpike = true;
+	IEnumerator CoWaitToSpike(float waitDuation)
+	{
+		CanHurtBySpike = false;
+
+		yield return new WaitForSeconds(waitDuation);
+
+		CanHurtBySpike = true;
+	}
+
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.transform.tag == "Food")
@@ -97,8 +125,8 @@ public class PlayerMovement : MonoBehaviour
 			}
 
 
-			Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
-			Debug.Log("Mass before: " + rb.mass);
+			//Debug.Log("ChangeMass before: " + fatindex + "/" + fd.GetHealth());
+			//Debug.Log("Mass before: " + rb.mass);
 
 			fatindex += (int) fd.GetHealth();
 			// Player is lover hp
@@ -106,11 +134,12 @@ public class PlayerMovement : MonoBehaviour
 				PlayerHurt = true;
 
 			rb.mass = Fat[fatindex];
-			Debug.Log("Mass: " + rb.mass);
-			Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
+			//Debug.Log("Mass: " + rb.mass);
+			//Debug.Log("ChangeMass: " + fatindex + "/" + fd.GetHealth());
 			Destroy(collision.gameObject);
 		}
-		
+
+
 		if (collision.transform.tag == "Ded")
 		{
 			rb.mass = 0.1f;
@@ -124,5 +153,24 @@ public class PlayerMovement : MonoBehaviour
 			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
 		}
 
+
+	}
+
+
+	private void OnTriggerStay2D(Collider2D collision)
+	{
+
+		if (collision.transform.tag == "Spikes" && CanHurtBySpike)
+		{
+			Debug.Log("Spikes!");
+
+			fatindex--;
+			if (rb.mass > Fat[fatindex])
+				PlayerHurt = true;
+
+			rb.mass = Fat[fatindex];
+
+			StartCoroutine(CoWaitToSpike(SpikeDelay));
+		}
 	}
 }

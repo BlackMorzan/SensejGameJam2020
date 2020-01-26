@@ -211,7 +211,7 @@ public class CharacterController2D : MonoBehaviour
 			if (!PlayerSound.isPlaying)
 				PlayerSound.Play();
 
-			Debug.Log("Land");
+			//Debug.Log("Land");
 		}
 
 		if (m_Grounded && move!=0)

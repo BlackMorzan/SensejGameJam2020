@@ -148,17 +148,17 @@ public class PlayerMovement : MonoBehaviour
 			Debug.Log("fall");
 		}
 
-
+        /*
 		if (collision.transform.tag == "Finish1")
 		{
-			SceneManager.LoadScene("Stage2 — kopia", LoadSceneMode.Single);
+			SceneManager.LoadScene(2, LoadSceneMode.Single);
 		}
 
 		if (collision.transform.tag == "Finish2")
 		{
-			SceneManager.LoadScene("Stage3", LoadSceneMode.Single);
+			SceneManager.LoadScene(3, LoadSceneMode.Single);
 		}
-
+        */
 		//CARNGE MODE/////////////^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 		if (collision.transform.tag == "Carnage")

@@ -55,7 +55,7 @@ public class CharacterController2D : MonoBehaviour
 	[SerializeField]
 	private AudioClip Death;
 
-	private bool InAir = false;
+	//private bool InAir = false;
 
 	[SerializeField]
 	private Animator m_Animator;
@@ -200,7 +200,6 @@ public class CharacterController2D : MonoBehaviour
 		{
 			PlayerSound.clip = Jump;
 			PlayerSound.Play();
-			InAir = true;
 		}
 
 		if (m_Grounded && m_Rigidbody2D.velocity.y < -0.5)
@@ -211,7 +210,6 @@ public class CharacterController2D : MonoBehaviour
 			if (!PlayerSound.isPlaying)
 				PlayerSound.Play();
 
-			//Debug.Log("Land");
 		}
 
 		if (m_Grounded && move!=0)

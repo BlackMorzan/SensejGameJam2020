@@ -11,7 +11,8 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Events")]
 	[Space]
 
-	public UnityEvent OnLandEvent;
+	public UnityEvent CarnageMode;
+	public UnityEvent SpookyMode;
 
 
 	public CharacterController2D controller;
@@ -50,8 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Awake()
 	{
-		if (OnLandEvent == null)
-			OnLandEvent = new UnityEvent();
+		if (CarnageMode == null)
+			CarnageMode = new UnityEvent();
 	}
 
 	// Update is called once per frame
@@ -148,9 +149,28 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 
-		if (collision.transform.tag == "Finish")
+		if (collision.transform.tag == "Finish1")
 		{
 			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
+		}
+
+		if (collision.transform.tag == "Finish2")
+		{
+			SceneManager.LoadScene("Stage2", LoadSceneMode.Single);
+		}
+
+		//CARNGE MODE/////////////^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+		if (collision.transform.tag == "Carnage")
+		{
+			// Animatrion + Particle
+			CarnageMode.Invoke();
+		}
+
+		if (collision.transform.tag == "Spooky")
+		{
+			SpookyMode.Invoke();
+			// Spooky Music
 		}
 
 
@@ -162,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
 		if (collision.transform.tag == "Spikes" && CanHurtBySpike)
 		{
-			Debug.Log("Spikes!");
+			//Debug.Log("Spikes!");
 
 			fatindex--;
 			if (rb.mass > Fat[fatindex])

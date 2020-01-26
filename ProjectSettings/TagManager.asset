@@ -8,6 +8,10 @@ TagManager:
   - Food
   - Ded
   - Spikes
+  - Carnage
+  - Spooky
+  - Finish1
+  - Finish2
   layers:
   - Default
   - TransparentFX

@@ -49,9 +49,14 @@ public class CarnageSC : MonoBehaviour
         Blood.transform.parent = null;
         Blood.Play();
 
+
+
         m_Animator.SetBool("pain", true);
         ending = Time.time + 5f;
         Debug.Log(ending + "/" + Time.time);
         TheEnd = true;
+
+        foreach (Transform child in this.GameObject) if (child.CompareTag("Zone")) { }
+
     }
 }

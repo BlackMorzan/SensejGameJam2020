@@ -50,27 +50,29 @@ public class CarnageSC : MonoBehaviour
     {
         //Animation Particle
         // animation - separate heat and make is ragdoll??
-        Blood.transform.parent = null;
 
         m_Animator.enabled = false;
         foreach(var body in BodyParts)
         {
             body.gameObject.SetActive(true);
             body.transform.parent = null;
-            body.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 10);
+            body.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 30);
         }
         Parent.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   ////gameObject.GetComponent<BoxCollider2D>;
+        m_Animator.gameObject.SetActive(false);
 
         //m_Animator.SetBool("pain", true);
         ending = Time.time + 30f;
-        Debug.Log(ending + "/" + Time.time);
+        //Debug.Log(ending + "/" + Time.time);
         TheEnd = true;
+        Blood.transform.parent = null;
         Blood.Play();
 
-        //foreach (Transform child in Parent.transform) if (child.CompareTag("Body")) 
-        //{
-        //    
-        //}
 
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    
+    //}
 }

@@ -2,9 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
+
 
 public class PlayerMovement : MonoBehaviour
 {
+
+	[Header("Events")]
+	[Space]
+
+	public UnityEvent OnLandEvent;
+
 
 	public CharacterController2D controller;
 
@@ -38,6 +46,12 @@ public class PlayerMovement : MonoBehaviour
 		rb = this.GetComponent<Rigidbody2D>();
 		rb.mass = Fat[fatindex];
 		PlayerDed = false;
+	}
+
+	private void Awake()
+	{
+		if (OnLandEvent == null)
+			OnLandEvent = new UnityEvent();
 	}
 
 	// Update is called once per frame

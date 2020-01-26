@@ -54,8 +54,9 @@ public class CarnageSC : MonoBehaviour
         m_Animator.enabled = false;
         foreach(var body in BodyParts)
         {
-            body.gameObject.SetActive(true);
             body.transform.parent = null;
+            body.gameObject.SetActive(true);
+            //body.GetComponent<Rigidbody2D>().WakeUp();
             body.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 30);
         }
         Parent.gameObject.GetComponent<CapsuleCollider2D>().enabled = false;   ////gameObject.GetComponent<BoxCollider2D>;

@@ -17,6 +17,7 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
+ 
         PM = this.GetComponent<PlayerMovement>();
     }
 
